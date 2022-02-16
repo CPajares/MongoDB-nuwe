@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const notFoundErrorHandler = (req, res) => {
   res.status(404).json({ error: "Not found" });
 };

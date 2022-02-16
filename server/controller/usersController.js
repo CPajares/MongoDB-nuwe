@@ -1,13 +1,11 @@
-const bcrypt = require("bcrypt");
 const User = require("../../database/models/user");
 
 const createUser = async (req, res, next) => {
-  const { name, username, password, age } = req.body;
+  const { username, age, city } = req.body;
   try {
     const user = await User.create({
-      name,
       username,
-      password: bcrypt.hashSync(password, 10),
+      city,
       age,
     });
     res.json(user);
@@ -45,7 +43,6 @@ const getUserByUserName = async (req, res, next) => {
 const editUser = async (req, res, next) => {
   const { id } = req.params;
   const data = req.body;
-
   try {
     const user = await User.findByIdAndUpdate(id, data, {
       new: true,
