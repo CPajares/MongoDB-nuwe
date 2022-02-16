@@ -8,6 +8,10 @@ const {
   generalErrorHandler,
 } = require("./middleware/errors");
 
+const corsOptions = {
+  origin: process.env.MONGO_DB,
+};
+
 const app = express();
 const initializeServer = (port) =>
   new Promise((resolve, reject) => {
@@ -21,7 +25,7 @@ const initializeServer = (port) =>
     });
   });
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/user", userRoutes);
